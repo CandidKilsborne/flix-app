@@ -16,6 +16,19 @@ class MoviesController < ApplicationController
     redirect_to @movie
   end
 
+  def new
+    @movie = Movie.new
+  end
+
+  def create
+    @movie = Movie.new(movie_params)
+    if @movie.save
+      redirect_to @movie
+    else
+      render :action => "new"
+    end
+  end
+
 private
   def set_movie
     @movie = Movie.find(params[:id])
