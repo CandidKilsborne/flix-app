@@ -12,8 +12,11 @@ class MoviesController < ApplicationController
   end
 
   def update
-    @movie.update(movie_params)
-    redirect_to @movie
+    if @movie.update(movie_params)
+      redirect_to @movie
+    else
+      render :edit
+    end
   end
 
   def new
@@ -25,7 +28,7 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to @movie
     else
-      render :action => "new"
+      render :new
     end
   end
 
